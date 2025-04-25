@@ -1,7 +1,5 @@
 package com.example.demo.final_project.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.final_project.service.CharacterService;
 import com.example.demo.final_project.service.MangaService;
 import com.example.demo.final_project.model.Manga;
-import com.example.demo.final_project.repository.CharacterRepository;
-import com.example.demo.final_project.repository.MangaRepository;
+
 
 import jakarta.validation.Valid;
 
