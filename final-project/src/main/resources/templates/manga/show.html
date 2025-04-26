@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dettaglio Manga</title>
+</head>
+<body>
+
+    <h1 th:text="${manga.title}"></h1>
+
+    <p><strong>Autore:</strong> <span th:text="${manga.author}"></span></p>
+    <p><strong>Descrizione:</strong></p>
+    <p th:text="${manga.description}"></p>
+
+    <h3>Personaggi:</h3>
+    <ul>
+        <li th:each="character : ${manga.characters}" th:text="${character.name}"></li>
+    </ul>
+
+    <a th:href="@{/manga}" class="btn btn-secondary">Torna alla lista</a>
+
+</body>
+</html>

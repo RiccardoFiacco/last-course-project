@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Personaggi</title>
+</head>
+<body>
+
+    <h1>Lista Personaggi</h1>
+
+    <!-- mettere form -->
+    <a th:href="@{/admin/pg/create}" class="btn btn-primary">Crea nuovo Personaggio</a>
+
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Manga</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="pg : ${pgs}">
+                <td th:text="${pg.id}"></td>
+                <td th:text="${pg.name}"></td>
+                <td th:text="${pg.description}"></td>
+                <td th:text="${pg.manga.title}"></td>
+                <td>
+                    <a th:href="@{/admin/pg/{id}(id=${pg.id})}" class="btn btn-info">Dettagli</a>
+                    <a th:href="@{/admin/pg/update/{id}(id=${pg.id})}" class="btn btn-warning">Modifica</a>
+                    <form th:action="@{/admin/pg/delete/{id}(id=${pg.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Elimina</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

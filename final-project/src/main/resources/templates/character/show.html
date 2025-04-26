@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dettaglio Personaggio</title>
+</head>
+<body>
+
+    <h1 th:text="${pg.name}"></h1>
+
+    <p><strong>Descrizione:</strong></p>
+    <p th:text="${pg.description}"></p>
+
+    <p><strong>Appartiene al Manga:</strong> <span th:text="${pg.manga.title}"></span></p>
+
+    <a th:href="@{/admin/pg}" class="btn btn-secondary">Torna alla lista</a>
+
+</body>
+</html>

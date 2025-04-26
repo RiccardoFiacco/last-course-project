@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.final_project.model.Character;
-import com.example.demo.final_project.model.Manga;
 import com.example.demo.final_project.service.CharacterService;
 import com.example.demo.final_project.service.MangaService;
 
@@ -21,7 +19,7 @@ import jakarta.validation.Valid;
 
 //nel caso crud per i personaggi
 @Controller
-@RequestMapping("/pg")
+@RequestMapping("/admin/pg")
 public class CharacterController {
 
     @Autowired

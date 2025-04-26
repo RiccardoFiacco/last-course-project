@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="fragments/head :: head"></head>
+  <body>
+    <header th:replace="fragments/header :: header"></header>
+    <h1>Lista Manga</h1>
+
+    <table class="table table-striped mt-4">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Titolo</th>
+          <th>Autore</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="manga : ${mangaList}">
+          <td th:text="${manga.id}"></td>
+          <td th:text="${manga.title}"></td>
+          <td th:text="${manga.author}"></td>
+          <td>
+            <a
+              th:href="@{/admin/manga/{id}(id=${manga.id})}"
+              class="btn btn-info"
+              >Dettagli</a
+            >
+            <a
+              th:href="@{/admin/manga/update/{id}(id=${manga.id})}"
+              class="btn btn-warning"
+              >Modifica</a
+            >
+            <form
+              th:action="@{/admin/manga/delete/{id}(id=${manga.id})}"
+              method="post"
+              style="display: inline"
+            >
+              <button type="submit" class="btn btn-danger">Elimina</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifica Manga</title>
+</head>
+<body>
+
+    <h1>Modifica Manga</h1>
+
+    <div th:replace="fragments/forms :: manga-form('/admin/manga/update/'+${manga.id}, 'Salva')"></div>
+
+    <a th:href="@{/admin/manga}" class="btn btn-secondary mt-3">Annulla</a>
+
+</body>
+</html>

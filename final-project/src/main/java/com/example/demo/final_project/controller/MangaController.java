@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.final_project.service.CharacterService;
 import com.example.demo.final_project.service.MangaService;
 import com.example.demo.final_project.model.Manga;
 
@@ -19,21 +18,18 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 @Controller
-@RequestMapping("/manga")
+@RequestMapping("/admin/manga")
 public class MangaController {
 
     @Autowired
     private MangaService mangaService;
 
-    @Autowired
-    private CharacterService pgService;
-
     @GetMapping
     public String index(@RequestParam(value = "nome", required = false) String title, Model model) {
         if (title != null) {
-            model.addAttribute("manga", mangaService.searchMangaByTitle(title));
+            model.addAttribute("mangaList", mangaService.searchMangaByTitle(title));
         } else {
-            model.addAttribute("manga", mangaService.getAllMangas());
+            model.addAttribute("mangaList", mangaService.getAllMangas());
         }
         return "manga/index";
     }
@@ -47,7 +43,7 @@ public class MangaController {
             return "manga/show";
         } catch (Exception e) {
             // Gestione dell'eccezione se il manga non viene trovato
-            return "redirect:/manga"; // Reindirizza alla lista dei manga
+            return "redirect:/admin/manga"; // Reindirizza alla lista dei manga
         }
 
     }
@@ -66,7 +62,7 @@ public class MangaController {
             return "manga/create";
         }
         mangaService.createManga(formManga);
-        return "redirect:/manga"; // Reindirizza alla lista dei manga dopo la creazione
+        return "redirect:/admin/manga"; // Reindirizza alla lista dei manga dopo la creazione
     }
 
     // rotte per la modifica del manga
@@ -75,20 +71,21 @@ public class MangaController {
         try {
             Manga manga = mangaService.getMangaById(id);
             model.addAttribute("manga", manga);
-            return "manga/update";
+            return "manga/edit";
         } catch (Exception e) {
-            return "redirect:/manga";
+            return "redirect:/admin/manga";
         }
     }
 
     @PostMapping("/update/{id}")
-    public String update(Model model, @Valid @ModelAttribute("manga") Manga formManga, BindingResult bindingResult,@PathVariable Integer id) {
-      
+    public String update(Model model, @Valid @ModelAttribute("manga") Manga formManga, BindingResult bindingResult,
+            @PathVariable Integer id) {
+
         if (bindingResult.hasErrors()) {
-            return "manga/update";
+            return "manga/edit";
         }
         mangaService.updateManga(id, formManga);
-        return "redirect:/manga"; // Reindirizza alla lista dei manga
+        return "redirect:/admin/manga"; // Reindirizza alla lista dei manga
     }
 
     // rotte per la cancellazione del manga
@@ -98,10 +95,10 @@ public class MangaController {
             mangaService.deleteManga(id); // Elimina il manga
         } catch (Exception e) {
             // Gestione dell'eccezione se il manga non viene trovato
-            return "redirect:/manga"; // Reindirizza alla lista dei manga
+            return "redirect:/admin/manga"; // Reindirizza alla lista dei manga
         }
         // Reindirizza alla lista dei manga dopo la cancellazione
-        return "redirect:/manga";
+        return "redirect:/admin/manga";
     }
 
 }
