@@ -50,7 +50,7 @@ public class CharacterController {
         }
 
         // Gestione dell'eccezione se il manga non viene trovato
-        return "redirect:character/index"; // Reindirizza alla lista dei manga
+        return "redirect:/admin/pg"; // Reindirizza alla lista dei manga
 
     }
 
@@ -70,7 +70,7 @@ public class CharacterController {
             return "character/create";
         }
         pgService.upsertCharacter(pg); // crea il pg
-        return "redirect:/character"; 
+        return "redirect:/admin/pg";
     }
 
     // rotte per la modifica del manga
@@ -84,7 +84,7 @@ public class CharacterController {
             }
             return "character/update";
         } catch (Exception e) {
-            return "redirect:/character";
+            return "redirect:/admin/pg";
         }
     }
 
@@ -96,7 +96,7 @@ public class CharacterController {
             return "character/update";
         }
         pgService.upsertCharacter(formPg);
-        return "redirect:/character"; // Reindirizza alla lista dei manga dopo la creazione
+        return "redirect:/admin/pg"; // Reindirizza alla lista dei manga dopo la creazione
     }
 
     // rotte per la cancellazione del manga
@@ -106,9 +106,9 @@ public class CharacterController {
             pgService.deleteCharacter(id); // Elimina il manga
         } catch (Exception e) {
             // Gestione dell'eccezione se il manga non viene trovato
-            return "redirect:/manga"; // Reindirizza alla lista dei manga
+            return "redirect:/admin/pg"; // Reindirizza alla lista dei manga
         }
         // Reindirizza alla lista dei manga dopo la cancellazione
-        return "redirect:/manga";
+        return "redirect:/admin/pg";
     }
 }

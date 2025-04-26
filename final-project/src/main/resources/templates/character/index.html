@@ -1,36 +1,62 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments/head :: head"></head>
-<body class="container">
+  <head th:replace="fragments/head :: head"></head>
+  <body class="bg-light">
     <header th:replace="fragments/header :: header"></header>
-    <h1>Lista Personaggi</h1>
+    <main class="container my-5">
+      <h1 class="h3 mb-3">Lista Personaggi</h1>
 
-    <table class="table table-striped mt-4">
-        <thead>
+      <div class="table-responsive">
+        <table
+          class="table table-hover table-bordered align-middle bg-white rounded shadow-sm"
+        >
+          <thead class="table-primary text-center">
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Descrizione</th>
-                <th>Manga</th>
-                <th></th>
+              <th style="width: 5%">ID</th>
+              <th style="width: 30%">Nome</th>
+              <th style="width: 35%">Descrizione</th>
+              <th style="width: 20%">Manga</th>
+              <th style="width: 10%">Azioni</th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
             <tr th:each="pg : ${pgs}">
-                <td th:text="${pg.id}"></td>
-                <td th:text="${pg.name}"></td>
-                <td th:text="${pg.description}"></td>
-                <td th:text="${pg.manga.title}"></td>
-                <td>
-                    <a th:href="@{/admin/pg/{id}(id=${pg.id})}" class="btn btn-info">Dettagli</a>
-                    <a th:href="@{/admin/pg/update/{id}(id=${pg.id})}" class="btn btn-warning">Modifica</a>
-                    <form th:action="@{/admin/pg/delete/{id}(id=${pg.id})}" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Elimina</button>
-                    </form>
-                </td>
+              <td th:text="${pg.id}" class="text-center"></td>
+              <td th:text="${pg.name}"></td>
+              <td th:text="${pg.description}"></td>
+              <td th:text="${pg.manga.title}"></td>
+              <td class="text-center">
+                <div class="btn-group btn-group-sm" role="group">
+                  <a
+                    th:href="@{/admin/pg/{id}(id=${pg.id})}"
+                    class="btn btn-outline-info"
+                    >Dettagli</a
+                  >
+                  <a
+                    th:href="@{/admin/pg/update/{id}(id=${pg.id})}"
+                    class="btn btn-outline-warning"
+                    >Modifica</a
+                  >
+                  <form
+                    th:action="@{/admin/pg/delete/{id}(id=${pg.id})}"
+                    method="post"
+                    style="display: inline"
+                    th:object="${pg}"
+                  >
+                    <button
+                      type="submit"
+                      class="btn btn-outline-danger"
+                      onclick="return confirm('Sei sicuro di voler eliminare questo personaggio?');"
+                    >
+                      Elimina
+                    </button>
+                  </form>
+                </div>
+              </td>
             </tr>
-        </tbody>
-    </table>
-
-</body>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
 </html>

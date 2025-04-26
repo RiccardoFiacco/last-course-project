@@ -2,88 +2,87 @@
 <html lang="en">
 
 <th:block th:fragment="manga-form(formAction, submitText)">
-    <form method="post" class="d-flex flex-column gap-4" th:action="@{${formAction}}" th:object="${manga}">
-        
-        <div>
-            <label for="title">Titolo Manga:</label>
-            <input type="text" id="title" th:field="*{title}" th:errorClass="is-invalid" required>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
-                </ul>
-            </div>
+    <form method="post" class="container p-4 bg-white rounded shadow-sm mt-4" th:action="@{${formAction}}" th:object="${manga}">
+  
+        <div class="mb-3">
+          <label for="title" class="form-label">Titolo Manga:</label>
+          <input type="text" id="title" class="form-control" th:field="*{title}" th:errorClass="is-invalid" required>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+            <ul class="mb-0 ps-3">
+              <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+            </ul>
+          </div>
         </div>
-
-        <div>
-            <label for="author">Autore:</label>
-            <input type="text" id="author" th:field="*{author}" th:errorClass="is-invalid" required>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('author')}" th:text="${err}"></li>
-                </ul>
-            </div>
+      
+        <div class="mb-3">
+          <label for="author" class="form-label">Autore:</label>
+          <input type="text" id="author" class="form-control" th:field="*{author}" th:errorClass="is-invalid" required>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}">
+            <ul class="mb-0 ps-3">
+              <li th:each="err : ${#fields.errors('author')}" th:text="${err}"></li>
+            </ul>
+          </div>
         </div>
-
-        <div>
-            <label for="description">Descrizione:</label>
-            <textarea id="description" th:field="*{description}" th:errorClass="is-invalid" required></textarea>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
-                </ul>
-            </div>
+      
+        <div class="mb-3">
+          <label for="description" class="form-label">Descrizione:</label>
+          <textarea id="description" class="form-control" th:field="*{description}" th:errorClass="is-invalid" rows="4" required></textarea>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
+            <ul class="mb-0 ps-3">
+              <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+            </ul>
+          </div>
         </div>
-
-        <div>
-            <button type="submit" class="btn btn-primary" th:text="${submitText}"></button>
+      
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary" th:text="${submitText}"></button>
         </div>
-
-    </form>
+      
+      </form>
+      
 </th:block>
 
 <th:block th:fragment="character-form(formAction, submitText, manga)">
-    <form method="post" class="d-flex flex-column gap-4" th:action="@{${formAction}}" th:object="${pg}">
+    <form method="post" class="container p-4 bg-white rounded shadow-sm mt-4" th:action="@{${formAction}}" th:object="${pg}">
 
-        <div>
-            <label for="name">Nome Personaggio:</label>
-            <input type="text" id="name" th:field="*{name}" th:errorClass="is-invalid" required>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
-                </ul>
-            </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Nome Personaggio:</label>
+          <input type="text" id="name" class="form-control" th:field="*{name}" th:errorClass="is-invalid" required>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+            <ul class="mb-0 ps-3">
+              <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+            </ul>
+          </div>
         </div>
-
-        <div>
-            <label for="description">Descrizione:</label>
-            <textarea id="description" th:field="*{description}" th:errorClass="is-invalid" required></textarea>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
-                </ul>
-            </div>
+      
+        <div class="mb-3">
+          <label for="description" class="form-label">Descrizione:</label>
+          <textarea id="description" class="form-control" th:field="*{description}" th:errorClass="is-invalid" rows="4" required></textarea>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
+            <ul class="mb-0 ps-3">
+              <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+            </ul>
+          </div>
         </div>
-
-        <div>
-            <label for="manga">Manga di Appartenenza:</label>
-            <select id="manga" th:field="*{manga}" class="form-select" required>
-                <option th:each="mangaItem : ${manga}" 
-                        th:value="${mangaItem.id}" 
-                        th:text="${mangaItem.title}">
-                </option>
-            </select>
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('manga')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('manga')}" th:text="${err}"></li>
-                </ul>
-            </div>
+      
+        <div class="mb-3">
+          <label for="manga" class="form-label">Manga di Appartenenza:</label>
+          <select id="manga" class="form-select" th:field="*{manga}" required>
+            <option th:each="mangaItem : ${manga}" th:value="${mangaItem.id}" th:text="${mangaItem.title}"></option>
+          </select>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('manga')}">
+            <ul class="mb-0 ps-3">
+              <li th:each="err : ${#fields.errors('manga')}" th:text="${err}"></li>
+            </ul>
+          </div>
         </div>
-
-        <div>
-            <button type="submit" class="btn btn-primary" th:text="${submitText}"></button>
+      
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary" th:text="${submitText}"></button>
         </div>
-
-    </form>
+      
+      </form>
+      
 </th:block>
 
 </html>

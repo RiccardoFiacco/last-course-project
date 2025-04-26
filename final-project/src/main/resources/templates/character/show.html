@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments/head :: head"></head>
-<body class="container">
+  <head th:replace="fragments/head :: head"></head>
+  <body class="container py-4">
+    <header th:replace="fragments/header :: header"></header>
 
-    <h1 th:text="${pg.name}"></h1>
+    <div class="card shadow-sm rounded p-4 my-4 bg-white">
+      <h1 class="h4 mb-3" th:text="${pg.name}"></h1>
 
-    <p><strong>Descrizione:</strong></p>
-    <p th:text="${pg.description}"></p>
+      <div class="mb-3">
+        <h6 class="fw-bold">Descrizione:</h6>
+        <p class="text-muted" th:text="${pg.description}"></p>
+      </div>
 
-    <p><strong>Appartiene al Manga:</strong> <span th:text="${pg.manga.title}"></span></p>
+      <div class="mb-4">
+        <h6 class="fw-bold">Appartiene al Manga:</h6>
+        <p class="text-muted" th:text="${pg.manga.title}"></p>
+      </div>
 
-    <a th:href="@{/admin/pg}" class="btn btn-secondary">Torna alla lista</a>
-
-</body>
+      <div>
+        <a th:href="@{/admin/pg}" class="btn btn-secondary"
+          >← Torna alla lista</a
+        >
+      </div>
+    </div>
+  </body>
 </html>
