@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.final_project.model.Character;
-import com.example.demo.final_project.model.Manga;
 import com.example.demo.final_project.repository.CharacterRepository;
 
 @Service
@@ -16,15 +15,22 @@ public class CharacterService {
     @Autowired
     private CharacterRepository characterRepository;
 
-    public Character createCharacter(Character character) {
-        // crea un nuovo personaggio e lo restituisce
-        return characterRepository.save(character);
-    }
-
     public List<Character> getAllPgs() {
         // restituisce la lista di tutti i manga
         return characterRepository.findAll();
     }
+
+    public Optional<Character> getCharacterById(Integer id) throws Exception {
+        // restituisce un personaggio in base all'ID
+        return characterRepository.findCharacterById(id);
+    }
+
+    public Character upsertCharacter(Character character) { // crea o aggiorna un personaggio e lo restituisce
+        // se il personaggio ha un ID, lo aggiorna, altrimenti lo crea
+        // crea un nuovo personaggio e lo restituisce
+        return characterRepository.save(character);
+    }
+
     public void deleteCharacter(Integer id) throws Exception {
         // elimina un personaggio in base all'ID
         if (!characterRepository.existsById(id)) {
@@ -33,8 +39,4 @@ public class CharacterService {
         characterRepository.deleteById(id);
     }
 
-    public Optional<Character> getCharacterById(Integer id) throws Exception {
-        // restituisce un personaggio in base all'ID
-        return characterRepository.findCharacterById(id);
-    }
 }

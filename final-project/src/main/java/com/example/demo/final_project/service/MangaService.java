@@ -31,9 +31,9 @@ public class MangaService {
         return manga.get();
     }
 
-    public List<Manga> findMangaByName(String name) {
-        // restituisce un manga in base all'ID
-        return mangaRepository.findByTitleContainingIgnoreCase(name); // restituisce il manga se esiste
+    public List<Manga> searchMangaByTitle(String title) {
+        // restituisce una lista di manga in base al titolo
+        return mangaRepository.findByTitleContainingIgnoreCase(title);
     }
 
     public Optional<Manga> findMangaById(Integer id) {
@@ -71,8 +71,4 @@ public class MangaService {
         mangaRepository.deleteById(id); // elimina il manga se esiste
     }
 
-    public List<Manga> searchMangaByTitle(String title) {
-        // restituisce una lista di manga in base al titolo
-        return mangaRepository.findByTitleContainingIgnoreCase(title);
-    }
 }
