@@ -41,8 +41,8 @@
     </form>
 </th:block>
 
-<th:block th:fragment="character-form(formAction, submitText, mangas)">
-    <form method="post" class="d-flex flex-column gap-4" th:action="@{${formAction}}" th:object="${character}">
+<th:block th:fragment="character-form(formAction, submitText, manga)">
+    <form method="post" class="d-flex flex-column gap-4" th:action="@{${formAction}}" th:object="${pg}">
 
         <div>
             <label for="name">Nome Personaggio:</label>
@@ -67,7 +67,7 @@
         <div>
             <label for="manga">Manga di Appartenenza:</label>
             <select id="manga" th:field="*{manga}" class="form-select" required>
-                <option th:each="mangaItem : ${mangas}" 
+                <option th:each="mangaItem : ${manga}" 
                         th:value="${mangaItem.id}" 
                         th:text="${mangaItem.title}">
                 </option>

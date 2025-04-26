@@ -29,7 +29,7 @@ public class CharacterController {
     private MangaService mangaService;
 
     @GetMapping
-    public String index(Model model, @PathVariable Integer id) {
+    public String index(Model model) {
         try {
             model.addAttribute("pgs", pgService.getAllPgs());
             return "character/index";
@@ -70,7 +70,7 @@ public class CharacterController {
             return "character/create";
         }
         pgService.upsertCharacter(pg); // crea il pg
-        return "redirect:/character"; // Reindirizza alla lista dei manga dopo la creazione
+        return "redirect:/character"; 
     }
 
     // rotte per la modifica del manga
@@ -80,6 +80,7 @@ public class CharacterController {
             Optional<Character> pg = pgService.getCharacterById(id);
             if (pg.isPresent()) {
                 model.addAttribute("pg", pg.get());
+                model.addAttribute("manga", mangaService.getAllMangas());
             }
             return "character/update";
         } catch (Exception e) {

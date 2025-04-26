@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista Personaggi</title>
-</head>
-<body>
-
+    <head th:replace="fragments/head :: head"></head>
+<body class="container">
+    <header th:replace="fragments/header :: header"></header>
     <h1>Lista Personaggi</h1>
-
-    <!-- mettere form -->
-    <a th:href="@{/admin/pg/create}" class="btn btn-primary">Crea nuovo Personaggio</a>
 
     <table class="table table-striped mt-4">
         <thead>
@@ -18,7 +12,7 @@
                 <th>Nome</th>
                 <th>Descrizione</th>
                 <th>Manga</th>
-                <th>Azioni</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
