@@ -49,12 +49,8 @@ public class MangaService {
         return mangaRepository.save(manga);
     }
 
-    public Manga updateManga(Integer id, Manga manga) throws Exception {
+    public Manga updateManga(Integer id, Manga manga){
         // aggiorna un manga esistente e lo restituisce
-        Optional<Manga> existingManga = mangaRepository.findById(id);
-        if (existingManga.isEmpty()) {
-            throw new Exception();
-        }
         manga.setId(id);
         for (Character p : manga.getCharacters()) {
             p.setManga(manga);

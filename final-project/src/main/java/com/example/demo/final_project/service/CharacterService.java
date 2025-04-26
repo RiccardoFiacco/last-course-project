@@ -20,7 +20,7 @@ public class CharacterService {
         return characterRepository.findAll();
     }
 
-    public Optional<Character> getCharacterById(Integer id) throws Exception {
+    public Optional<Character> getCharacterById(Integer id){
         // restituisce un personaggio in base all'ID
         return characterRepository.findCharacterById(id);
     }
@@ -31,10 +31,10 @@ public class CharacterService {
         return characterRepository.save(character);
     }
 
-    public void deleteCharacter(Integer id) throws Exception {
+    public void deleteCharacter(Integer id) {
         // elimina un personaggio in base all'ID
         if (!characterRepository.existsById(id)) {
-            throw new Exception();
+            return; // se il personaggio non esiste, non fare nulla
         }
         characterRepository.deleteById(id);
     }
