@@ -1,14 +1,16 @@
 package com.example.demo.final_project.security;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.example.demo.final_project.model.User;
-
+import com.example.demo.final_project.model.Role;
 //classe per la gestione dei dettagli dell'utente
 public class DataBaseUserDetails implements UserDetails {
-
+    //se implemento UserDetails devo implementare concretamente i metodi per far capire a Spring Security i dettagli dell'utente
+    //es getId(), getUsername(), getPassword(), ecc.
+    //in questo caso non ci interessa sapere se l'account è scaduto, bloccato, ecc. quindi ritorniamo sempre true
     public final Integer id;
     public final String username;
     public final String password;
@@ -18,11 +20,12 @@ public class DataBaseUserDetails implements UserDetails {
         this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();
-        // Mappiamo i ruoli in GrantedAuthority (prendendo il nome del ruolo)
-        this.authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toSet());
-        System.out.println("Authorities caricate per " + username + ": " + authorities);
+        // Mappiamo i ruoli in GrantedAuthority (prendendo il nome del ruolo) perche spring accetta GrantedAuthority 
+        //altrimenti non funziona e non accetta Role
+        this.authorities = new HashSet<GrantedAuthority>(); 
+        for (Role role : user.getRoles()) {
+            authorities.add( new SimpleGrantedAuthority(role.getName()));
+        }
     }
 
     public Integer getId() {

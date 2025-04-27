@@ -8,11 +8,14 @@ import com.example.demo.final_project.model.Character;
 import com.example.demo.final_project.model.Manga;
 import com.example.demo.final_project.repository.MangaRepository;
 
+/**
+ * classe di servizio per la gestione dei manga
+ *contiene metodi per le operazioni CRUD sui manga
+ *utilizza il repository MangaRepository per l'accesso ai dati
+ * @return
+ */
 @Service
 public class MangaService {
-    // classe di servizio per la gestione dei manga
-    // contiene metodi per le operazioni CRUD sui manga
-    // utilizza il repository MangaRepository per l'accesso ai dati
 
     @Autowired
     private MangaRepository mangaRepository;

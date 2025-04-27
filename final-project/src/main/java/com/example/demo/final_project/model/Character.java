@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+/**
+ * annotation che indicano che questa classe è un'entità 
+ * e che viene mappata nel db con il nome "characters"
+ * @return
+ */
 @Entity
 @Table(name = "characters")
 public class Character {

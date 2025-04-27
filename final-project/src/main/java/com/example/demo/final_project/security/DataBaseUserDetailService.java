@@ -22,8 +22,7 @@ public class DataBaseUserDetailService implements UserDetailsService {
             // Se l'utente non viene trovato, lancia un'eccezione
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
-        return new DataBaseUserDetails(user.get());// Restituisce un oggetto UserDetails che rappresenta l'utente
-                                                   // trovato
+        return new DataBaseUserDetails(user.get());// Restituisce un oggetto UserDetails che rappresenta l'utente trovato
     }
     
 }

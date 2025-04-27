@@ -11,50 +11,70 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import org.springframework.http.HttpMethod;
 
+/**
+ * configuration indica che questa classe è una configurazione di Spring 
+ * inoltre vado a dire a spring di usare queste configurazioni per ogni richiesta web
+ * @return
+ */
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity 
 public class SecurityConfig {
-
+    /**
+     * l'annotation dice che il metodo crea un oggetto che sarà gestito dal contenitore Spring.
+     * quando Spring esegue l'applicazione, si occupa della creazione, configurazione e gestione di questo oggetto.
+     * con suppreswarnings andiamo a dire a java di non darci avvisi per l'uso di classi deprecate
+     * passando al metodo, creiamo una security filter chain per le request passando un oggetto httpsecuirty
+     * che andremo a restitutire con il metodo build dell'obj httpsecuirity
+     * @return
+     */
     @Bean
     @SuppressWarnings("removal")
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/api/**").permitAll() // o limitare se serve
+                .requestMatchers("/api/**").permitAll() // tutti gli endpoint che iniziano con api sono accessibili a tutti
                 .requestMatchers(HttpMethod.GET, "/admin/*/", "/admin/*/show").hasAnyAuthority("ADMIN", "USER")
-                .requestMatchers("/admin/**").hasAuthority("ADMIN")// tutto quello che inizia con admin e finisce con
-                                                                   // create è solo per admin
-                .requestMatchers("/", "/index.html", "/static/**").permitAll() //
-                .anyRequest().authenticated()
-                .and().logout()
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                .requestMatchers("/", "/index.html", "/static/**").permitAll() //tutti gli altri endpoint sono accessibili a tutti
+                .anyRequest().authenticated()// qualsiasi altra richiesta deve essere autenticata
+                .and().logout()//configura l'url di logout
                 .and().exceptionHandling()
-                .and().formLogin();
+                .and().formLogin(); //attiva il login form di default di Spring Security
 
-        return http.build();
+        return http.build();// costruisce il filtro di sicurezza
     }
 
-    // AuthProvider
-    @Bean
+    /**
+     * l'annotation dice che il metodo crea un oggetto che sarà gestito dal contenitore Spring.
+     * quando Spring esegue l'applicazione, si occupa della creazione, configurazione e gestione di questo oggetto.
+     * Spring registrerà l'oggetto DaoAuthenticationProvider restituito dal metodo come un bean 
+     * che utilizzera poi, in base alle necessita, nell'applicazione. 
+     * @return
+     */
+    @Bean 
     DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        // questo provider usera x come servizio per recuperare gli utenti via username
         authProvider.setUserDetailsService(userDetailsService());
-        // e passwordEncoder per codificare le password
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
-
     }
 
-    @Bean // Crea e registra un bean di tipo DatabaseUserDetailService nel contesto Spring
+    /**
+     * l'annotation dice che il metodo restituira un oggetto che sara gestito da spring come un bean
+     * Spring chiama questo metodo all'avvio, prende l'oggetto creato e lo mette nel suo contesto
+     * @return
+     */
+    @Bean 
     DataBaseUserDetailService userDetailsService() {
-        // bean usato da Spring Security come UserDetailsService
-        // per recuperare le informazioni dell’utente dal database, quando qualcuno
-        // effettua il login.
         return new DataBaseUserDetailService();
     }
 
-    // Password Encoder
+    /**
+     * stessa cosa di sopra, ma ritorna un oggetto PasswordEncoder 
+     * che ci aiuta nella codifica delle password
+     * @return
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
