@@ -22,16 +22,10 @@ import org.springframework.http.HttpMethod;
 @EnableWebSecurity
 public class SecurityConfig {
     /**
-     * l'annotation dice che il metodo crea un oggetto che sarà gestito dal
-     * contenitore Spring.
      * quando Spring esegue l'applicazione, si occupa della creazione,
      * configurazione e gestione di questo oggetto.
      * con suppreswarnings andiamo a dire a java di non darci avvisi per l'uso di
      * classi deprecate
-     * passando al metodo, creiamo una security filter chain per le request passando
-     * un oggetto httpsecuirty
-     * che ci servira a restitutire, con il metodo build, la filter chain
-     * 
      * @return
      */
     @Bean
@@ -40,17 +34,15 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/api/**").permitAll() // tutti gli endpoint che iniziano con api sono accessibili a
-                                                        // tutti
+                .requestMatchers("/api/**").permitAll() // tutti gli endpoint che iniziano con api sono accessibili a tutti
                 .requestMatchers(HttpMethod.GET, "/admin/*/", "/admin/*/show").hasAnyAuthority("ADMIN", "USER")
                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                .requestMatchers("/", "/index.html", "/static/**").permitAll() // tutti gli altri endpoint sono
-                                                                               // accessibili a tutti
-                .anyRequest().authenticated()// qualsiasi altra richiesta deve essere autenticata
-                .and().logout()// configura l'url di logout
-                .and().formLogin(); // attiva il login form di default di Spring Security
+                .requestMatchers("/", "/index.html", "/static/**").permitAll() // tutti gli altri endpoint sono accessibili a tutti
+                .anyRequest().authenticated()
+                .and().logout()
+                .and().formLogin();
 
-        return http.build();// costruisce il filtro di sicurezza
+        return http.build();
     }
 
     /**

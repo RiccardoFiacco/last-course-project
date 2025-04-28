@@ -2,6 +2,8 @@ package com.example.demo.final_project.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,7 +27,7 @@ public class Manga {
     private String description;
 
     @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL) 
-    private List<Character> characters;
+    private List<Character> characters = new ArrayList<>();
 
     public Manga() {
     }

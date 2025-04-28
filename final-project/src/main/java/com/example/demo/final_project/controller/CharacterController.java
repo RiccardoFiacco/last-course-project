@@ -38,7 +38,6 @@ public class CharacterController {
             model.addAttribute("pgs", pgService.getAllPgs());
             return "character/index";
         } catch (Exception e) {
-            // Gestione dell'eccezione se il manga non viene trovato
             model.addAttribute("error", true);// flag per eventuale errore
             return "character/index"; // Reindirizza alla lista dei manga
         }
@@ -53,27 +52,26 @@ public class CharacterController {
             return "character/show";
         }
 
-        // Gestione dell'eccezione se il manga non viene trovato
         return "redirect:/admin/pg"; // Reindirizza alla lista dei manga
 
     }
 
     // rotte per la creazione del p
 
-    @GetMapping("/create") // prendo la pagina di creazione
+    @GetMapping("/create") 
     public String create(Model model) {
         model.addAttribute("pg", new Character());
         model.addAttribute("manga", mangaService.getAllMangas());// per una select
         return "character/create";
     }
 
-    @PostMapping("/create") // creo il pg
+    @PostMapping("/create") 
     public String create(Model model, @Valid @ModelAttribute("pg") Character pg, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("manga", mangaService.getAllMangas()); // se non ripasso potrebbero
             return "character/create";
         }
-        pgService.upsertCharacter(pg); // crea il pg
+        pgService.upsertCharacter(pg);
         return "redirect:/admin/pg";
     }
 

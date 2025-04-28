@@ -8,8 +8,7 @@ import com.example.demo.final_project.model.Character;
 import com.example.demo.final_project.repository.CharacterRepository;
 
 /**
- *  grazie all'annotation andiamo a dire che questa classe 
- *  appartiene al livello di servizio che contiene la logica per la gestione dei personaggi
+ *  livello di servizio che contiene la logica per la gestione dei personaggi
  *  contiene metodi per le operazioni CRUD sui personaggi
  *  utilizza il repository CharacterRepository per l'accesso ai dati
  * @return
