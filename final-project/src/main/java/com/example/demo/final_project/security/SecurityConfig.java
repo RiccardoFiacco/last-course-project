@@ -12,19 +12,26 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.http.HttpMethod;
 
 /**
- * configuration indica che questa classe è una configurazione di Spring 
- * inoltre vado a dire a spring di usare queste configurazioni per ogni richiesta web
+ * configuration indica che questa classe è una configurazione di Spring
+ * inoltre vado a dire a spring di usare queste configurazioni per ogni
+ * richiesta web
+ * 
  * @return
  */
 @Configuration
-@EnableWebSecurity 
+@EnableWebSecurity
 public class SecurityConfig {
     /**
-     * l'annotation dice che il metodo crea un oggetto che sarà gestito dal contenitore Spring.
-     * quando Spring esegue l'applicazione, si occupa della creazione, configurazione e gestione di questo oggetto.
-     * con suppreswarnings andiamo a dire a java di non darci avvisi per l'uso di classi deprecate
-     * passando al metodo, creiamo una security filter chain per le request passando un oggetto httpsecuirty
+     * l'annotation dice che il metodo crea un oggetto che sarà gestito dal
+     * contenitore Spring.
+     * quando Spring esegue l'applicazione, si occupa della creazione,
+     * configurazione e gestione di questo oggetto.
+     * con suppreswarnings andiamo a dire a java di non darci avvisi per l'uso di
+     * classi deprecate
+     * passando al metodo, creiamo una security filter chain per le request passando
+     * un oggetto httpsecuirty
      * che ci servira a restitutire, con il metodo build, la filter chain
+     * 
      * @return
      */
     @Bean
@@ -33,26 +40,31 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/api/**").permitAll() // tutti gli endpoint che iniziano con api sono accessibili a tutti
+                .requestMatchers("/api/**").permitAll() // tutti gli endpoint che iniziano con api sono accessibili a
+                                                        // tutti
                 .requestMatchers(HttpMethod.GET, "/admin/*/", "/admin/*/show").hasAnyAuthority("ADMIN", "USER")
                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                .requestMatchers("/", "/index.html", "/static/**").permitAll() //tutti gli altri endpoint sono accessibili a tutti
+                .requestMatchers("/", "/index.html", "/static/**").permitAll() // tutti gli altri endpoint sono
+                                                                               // accessibili a tutti
                 .anyRequest().authenticated()// qualsiasi altra richiesta deve essere autenticata
-                .and().logout()//configura l'url di logout
-                .and().exceptionHandling()
-                .and().formLogin(); //attiva il login form di default di Spring Security
+                .and().logout()// configura l'url di logout
+                .and().formLogin(); // attiva il login form di default di Spring Security
 
         return http.build();// costruisce il filtro di sicurezza
     }
 
     /**
-     * l'annotation dice che il metodo crea un oggetto che sarà gestito da Spring  come un bean.
-     * quando Spring esegue l'applicazione, si occupa della creazione, configurazione e gestione di questo oggetto.
-     * Spring registrerà l'oggetto DaoAuthenticationProvider restituito dal metodo come un bean 
-     * che utilizzera poi, in base alle necessita, nell'applicazione. 
+     * l'annotation dice che il metodo crea un oggetto che sarà gestito da Spring
+     * come un bean.
+     * quando Spring esegue l'applicazione, si occupa della creazione,
+     * configurazione e gestione di questo oggetto.
+     * Spring registrerà l'oggetto DaoAuthenticationProvider restituito dal metodo
+     * come un bean
+     * che utilizzera poi, in base alle necessita, nell'applicazione.
+     * 
      * @return
      */
-    @Bean 
+    @Bean
     DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
@@ -61,18 +73,22 @@ public class SecurityConfig {
     }
 
     /**
-     * l'annotation dice che il metodo restituira un oggetto che sara gestito da spring come un bean
-     * Spring chiama questo metodo all'avvio, prende l'oggetto creato e lo mette nel suo contesto
+     * l'annotation dice che il metodo restituira un oggetto che sara gestito da
+     * spring come un bean
+     * Spring chiama questo metodo all'avvio, prende l'oggetto creato e lo mette nel
+     * suo contesto
+     * 
      * @return
      */
-    @Bean 
+    @Bean
     DataBaseUserDetailService userDetailsService() {
         return new DataBaseUserDetailService();
     }
 
     /**
-     * stessa cosa di sopra, ma ritorna un oggetto PasswordEncoder 
+     * stessa cosa di sopra, ma ritorna un oggetto PasswordEncoder
      * che ci aiuta nella codifica delle password
+     * 
      * @return
      */
     @Bean
