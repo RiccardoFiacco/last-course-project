@@ -17,7 +17,11 @@ import com.example.demo.final_project.service.MangaService;
 
 import jakarta.validation.Valid;
 
-//nel caso crud per i personaggi
+/**
+ * classe di controller per la gestione delle request sui personaggi
+ * utilizza il servizio CharacterService per l'accesso ai dati
+ * @return
+ */
 @Controller
 @RequestMapping("/admin/pg")
 public class CharacterController {

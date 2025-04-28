@@ -24,7 +24,7 @@ public class SecurityConfig {
      * quando Spring esegue l'applicazione, si occupa della creazione, configurazione e gestione di questo oggetto.
      * con suppreswarnings andiamo a dire a java di non darci avvisi per l'uso di classi deprecate
      * passando al metodo, creiamo una security filter chain per le request passando un oggetto httpsecuirty
-     * che andremo a restitutire con il metodo build dell'obj httpsecuirity
+     * che ci servira a restitutire, con il metodo build, la filter chain
      * @return
      */
     @Bean
@@ -46,7 +46,7 @@ public class SecurityConfig {
     }
 
     /**
-     * l'annotation dice che il metodo crea un oggetto che sarà gestito dal contenitore Spring.
+     * l'annotation dice che il metodo crea un oggetto che sarà gestito da Spring  come un bean.
      * quando Spring esegue l'applicazione, si occupa della creazione, configurazione e gestione di questo oggetto.
      * Spring registrerà l'oggetto DaoAuthenticationProvider restituito dal metodo come un bean 
      * che utilizzera poi, in base alle necessita, nell'applicazione. 

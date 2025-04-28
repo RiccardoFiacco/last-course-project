@@ -2,7 +2,6 @@ package com.example.demo.final_project.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,12 +24,10 @@ public class Manga {
     @NotBlank(message = "campo deve essere popolato")
     private String description;
 
-    @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL) // cascade type all permette di inserire i personaggi in
-                                                              // automatico
-    private List<Character> characters = new ArrayList<>(); // inizializzo la lista per evitare null pointer exception
+    @OneToMany(mappedBy = "manga", cascade = CascadeType.ALL) 
+    private List<Character> characters;
 
     public Manga() {
-        // Costruttore vuoto per JPA
     }
 
     public Manga(Integer id, String title, String author, String description, List<Character> characters) {

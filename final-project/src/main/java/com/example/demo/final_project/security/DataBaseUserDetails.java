@@ -6,11 +6,16 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.example.demo.final_project.model.User;
 import com.example.demo.final_project.model.Role;
-//classe per la gestione dei dettagli dell'utente
+
+/**
+ * classe per la gestione dei dettagli dell'utente
+ * se implemento UserDetails devo implementare concretamente i metodi per far capire a Spring Security i dettagli dell'utente
+ * es getId(), getUsername(), getPassword(), ecc.
+ * in questo caso non ci interessa sapere se l'account è scaduto, bloccato, ecc. quindi ritorniamo sempre true
+ */
+
 public class DataBaseUserDetails implements UserDetails {
-    //se implemento UserDetails devo implementare concretamente i metodi per far capire a Spring Security i dettagli dell'utente
-    //es getId(), getUsername(), getPassword(), ecc.
-    //in questo caso non ci interessa sapere se l'account è scaduto, bloccato, ecc. quindi ritorniamo sempre true
+ 
     public final Integer id;
     public final String username;
     public final String password;
