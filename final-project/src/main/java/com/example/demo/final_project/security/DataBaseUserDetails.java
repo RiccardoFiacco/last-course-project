@@ -13,9 +13,6 @@ import com.example.demo.final_project.model.Role;
  * implemento UserDetails per risalire alle informazioni dell'utente loggato,
  * devo implementare concretamente i metodi per far capire a Spring Security i
  * dettagli dell'utente
- * es getId(), getUsername(), getPassword(), ecc.
- * in questo caso non ci interessa sapere se l'account è scaduto, bloccato, ecc.
- * quindi ritorniamo sempre true
  */
 
 public class DataBaseUserDetails implements UserDetails {
